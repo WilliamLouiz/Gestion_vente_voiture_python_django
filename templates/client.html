@@ -1,0 +1,92 @@
+{% include 'head.html' %}
+{% load static %}
+
+  <main id="main">
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs" data-aos="fade-in">
+      <div class="container">
+        <h2>listes des Client</h2>
+        <p>Voici les listes des clients, vous pouvez encore ajouter en cliquant sur ajout pour un nouvel enregistrement de client. </p>
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+        <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Liste des Clients</h4>
+                  <p class="card-description">
+                    <a href="{% url 'ajoutCli'%}" class="get-started-btn">Ajouter</a>
+                  </p>
+                  {% if messages %}
+                  <div class="btn btn-warning" data-aos="fade-in">
+                    <div class="container">
+                      {% for message in messages %}
+                            <h2>Message</h2>
+                            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </div>
+                  </div>
+                {% endif %}
+                  <div class="table-responsive">
+                    <form action="{% url 'recherche' %}" method="get">
+                        <input type="text" name="q" class="form-control" placeholder="Rechercher un client">
+                        <button type="submit" class="btn btn-warning">Rechercher</button>
+                    </form>
+                    <table class="table table-striped">
+                      <thead>
+                        <tr>
+                          <th>
+                            Profile
+                          </th>
+                          <th>
+                            N° du client
+                          </th>
+                          <th>
+                            Nom du Client
+                          </th>
+                          <th>
+                            Adresse du Client
+                          </th>
+                          <th>
+                            Actions
+                          </th>
+                        </tr>
+                      </thead>
+                      {% for client in ListCli%}
+                      <tbody>
+                        <tr>
+                          <td class="py-1">
+                            <img src="{% static 'img/p.png'%}" alt="image"/>
+                          </td>
+                          <td>
+                            {{client.NumClient}}
+                          </td>
+                          <td>
+                            {{client.NomClient}}
+                          </td>
+                          <td>
+                            {{client.AdrClient}}
+                          </td>
+                          <td>
+                            <div class="button">
+                              <a href="{% url 'client_modify' client.NumClient %}" class="btn btn-primary">Modifier</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{% url 'client_delete' client.NumClient %}" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce client ?')"><i class="bx bxl-twitter"></i>Supprimer</a>
+
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                      {% endfor %}
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+      </div>
+    </section><!-- End About Section -->
+  </main><!-- End #main -->
+
+  {% include 'footer.html' %}

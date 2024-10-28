@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Suppression de client</title>
+</head>
+<body>
+    <h1>Êtes-vous sûr de vouloir supprimer cette voiture ?</h1>
+    <p>Nom du client : {{ voiture.Matricule }}</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirmer la suppression</button>
+    </form>
+</body>
+</html>

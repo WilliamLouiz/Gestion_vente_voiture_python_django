@@ -1,0 +1,53 @@
+{% include 'head.html' %}
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs" data-aos="fade-in">
+      <div class="container">
+        <h2>Modification d'une nouvelle Voiture</h2>
+        <p>Modifier la Voiture, en remplissant toutes les champs. </p>
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+
+      <div class="container" data-aos="fade-up">
+
+        <div class="row mt-5">
+
+          <div class="col-lg-8 mt-5 mt-lg-0">
+
+            <form method="post" role="form" enctype="multipart/form-data">
+                {% csrf_token %}
+              <label for="numCli">Numéro du matricule:</label><br>
+              <div class="form-group mt-3">
+                <input type="text" class="form-control" name="Matricule" pattern="[0-9]{4}" value="{{voiture.Matricule}}" id="NumCli" placeholder="Le Numéro Matricule en 4 chiffres" required>
+              </div>
+                <label for="Marque">Marque :</label><br>
+              <div class="form-group mt-3">
+                <input type="text" class="form-control" name="Marque" id="Marque" value="{{voiture.Marque}}" placeholder="Marque de la Voiture" required>
+              </div>
+              <label for="Prix">Adresse du client:</label><br>
+              <div class="form-group mt-3">
+                <input type="text" class="form-control" name="Prix" id="Prix" value="{{voiture.Pu}}" placeholder="Prix de la voiture" required>
+              </div>
+              <div class="form-group mt-3">
+                <input type="file" class="form-control" name="image" id="image" value="{{voiture.image}}" placeholder="Image de la voiture" required>
+              </div>
+              <br>
+              <button type="submit" class="get-started-btn">Modifier la Voiture</button>
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+    {% include 'footer.html' %}

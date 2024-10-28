@@ -1,0 +1,49 @@
+{% include 'head.html' %}
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs" data-aos="fade-in">
+      <div class="container">
+        <h2>Ajout d'un nouveau Client</h2>
+        <p>Ajouter ici votre Client, en remplissant toutes les champs. </p>
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+
+      <div class="container" data-aos="fade-up">
+
+        <div class="row mt-5">
+
+          <div class="col-lg-8 mt-5 mt-lg-0">
+
+            <form method="post" role="form" class="">
+                {% csrf_token %}
+              <label for="numCli">Numéro du client:</label><br>
+              <div class="form-group mt-3">
+                <input type="text" class="form-control" name="NumCli" id="NumCli" placeholder="Le Numéro du client" required>
+              </div>
+                <label for="nomcli">Nom du client:</label><br>
+                <div class="form-group mt-3">
+                <input type="text" class="form-control" name="NomCli" id="NomCli" placeholder="Le Nom du client" required>
+              </div>
+              <label for="adrCli">Adresse du client:</label><br>
+              <div class="form-group mt-3">
+                <input type="text" class="form-control" name="AdrCli" id="AdrCli" placeholder="L'Adresse du client" required>
+              </div>
+              <button type="submit" class="get-started-btn">Ajouter le Client</button>
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+    {% include 'footer.html' %}

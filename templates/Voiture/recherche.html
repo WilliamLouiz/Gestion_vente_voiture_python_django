@@ -1,0 +1,84 @@
+{% include 'head.html' %}
+  <main id="main" data-aos="fade-in">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs">
+      <div class="container">
+        <h2>Voitures</h2>
+        <p>Voici les voitures disponibles dans notre magasin. </p>
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Courses Section ======= -->
+    <section id="courses" class="courses">
+      <div class="container" data-aos="fade-up">
+        <a href="{% url 'ajoutV'%}" class="get-started-btn">Ajouter</a>
+        {% if messages %}
+                  <div class="btn btn-warning" data-aos="fade-in">
+                    <div class="container">
+                      {% for message in messages %}
+                            <h2>Message</h2>
+                            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </div>
+                  </div>
+                {% endif %}
+          <form action="{% url 'recherche' %}" method="get">
+                        <input type="text" name="q" class="form-control" placeholder="Rechercher une voiture">
+                        <button type="submit" class="btn btn-warning">Rechercher</button>
+          </form>
+        <div class="row" data-aos="zoom-in" data-aos-delay="100">
+          {% block content %}
+                      {% for client in voiture %}
+
+                      <h4>Résultats de la recherche pour "{{ query }}"</h4>
+
+          <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+            <div class="course-item">
+              <img src="{{ voiture.image.url }} " class="img-fluid" alt="{{ voiture.marque}}">
+              <div class="course-content">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4>$ Prix</h4>
+                  <p class="price">{{ voiture.Pu }}</p>
+                </div>
+                <div class="trainer d-flex justify-content-between align-items-center">
+                  <div class="trainer-profile d-flex align-items-center">
+                    <img src="assets/img/trainers/trainer-1.jpg" class="img-fluid" alt="">
+                    <span>{{ voiture.Marque }}</span>
+                  </div>
+
+                  <div class="trainer-rank d-flex align-items-center">
+                    <i class="bx bx-user"></i>&nbsp;50
+                    &nbsp;&nbsp;
+                    <i class="bx bx-heart"></i>&nbsp;65
+                  </div>
+
+                </div>
+                <h3><a href="course-details.html">Remarque :</a></h3>
+                <p>Nous vous offrons ici les plus belles Voitures avec le prix imaginables! Matricule N°: <b>{{ voiture.Matricule }}</b> Nous vous remercions</p>
+
+                <div class="trainer-rank d-flex align-items-center">
+                    <a href="{% url 'voiture_modify' voiture.Matricule %}" class="btn btn-primary">Modifier</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="{% url 'voiture_delete' voiture.Matricule %}" class="btn btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette Voiture ?')">Supprimer</a>
+                  </div>
+
+
+              </div>
+            </div>
+          </div> <!-- End Course Item-->
+            {% empty %}
+            <p>Aucun résultat trouvé.</p>
+          <!-- End Course Item-->
+          {% endfor %}
+         {% endblock %}
+        </div>
+
+      </div>
+    </section><!-- End Courses Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  {% include 'footer.html' %}

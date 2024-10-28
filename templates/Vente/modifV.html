@@ -1,0 +1,55 @@
+
+{% include 'head.html' %}
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <div class="breadcrumbs" data-aos="fade-in">
+      <div class="container">
+        <h2>Modification d'une Vente</h2>
+        <p>Modifier ici votre vente, en remplissant toutes les champs. </p>
+      </div>
+    </div><!-- End Breadcrumbs -->
+
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+
+      <div class="container" data-aos="fade-up">
+
+        <div class="row mt-5">
+
+          <div class="col-lg-8 mt-5 mt-lg-0">
+
+            <form method="post" role="form" class="">
+                {% csrf_token %}
+              <div class="form-group mt-3">
+
+                  <label for="voiture_id">Voiture :</label>
+                    <select name="voiture_id" id="voiture_id" class="form-control">
+                        {% for voiture in voiture %}
+                            <option value="{{ voiture.Matricule }}" class="form-control">{{ voiture.Matricule }}</option>
+                        {% endfor %}
+                    </select>
+              </div>
+                <div class="form-group mt-3">
+                <label for="client_id">Client :</label>
+                <select name="client_id" id="client_id" class="form-control">
+                    {% for client in clients %}
+                        <option value="{{ client.NumClient }}">{{ client.NomClient }}</option>
+                    {% endfor %}
+                </select><br>
+              </div>
+              <button type="submit" class="get-started-btn">Créer la vente</button>
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- End Contact Section -->
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+    {% include 'footer.html' %}
