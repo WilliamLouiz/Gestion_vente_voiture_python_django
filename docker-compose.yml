@@ -7,12 +7,13 @@ services:
       - "8000:8000"
     environment:
       - DEBUG=1
-      - DATABASE_URL=postgres://william:cummial@db:5432/gestion_voiture
+      - DATABASE_URL=postgresql://william:cummial@db:5432/gestion_voiture
       - POSTGRES_DB=gestion_voiture
       - POSTGRES_USER=william
       - POSTGRES_PASSWORD=cummial
     depends_on:
-      - db
+      db:
+        condition: service_healthy  # Ajouté
     volumes:
       - .:/app
       - static_volume:/app/staticfiles
@@ -28,6 +29,11 @@ services:
       - POSTGRES_PASSWORD=cummial
     ports:
       - "5432:5432"
+    healthcheck:       # Ajouté
+      test: ["CMD-SHELL", "pg_isready -U william -d gestion_voiture"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
 volumes:
   postgres_data:
