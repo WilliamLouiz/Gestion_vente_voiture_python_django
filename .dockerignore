@@ -1,0 +1,9 @@
+.git
+.gitignore
+*.pyc
+__pycache__
+.DS_Store
+myenv
+db.sqlite3
+staticfiles
+media

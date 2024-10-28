@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os.path
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +26,7 @@ SECRET_KEY = 'django-insecure-e%5ike$h2czj4l92%=2tx408juex7m#jog$78pmr=#_m%v9&8n
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['gestion-voiture.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -76,16 +77,13 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# Configuration de la base de données
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "gestion_voiture",
-        "USER": "postgres",
-        "PASSWORD": "cummial",
-        "HOST": "localhost",
-        "PORT": "5432",
-    }
-}
+    'default': dj_database_url.config(
+        default='postgresql://william:cummial@db:5432/gestion_voiture',
+        conn_max_age=600
+    )
+}  
 
 
 # Password validation
@@ -123,6 +121,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'client', 'static'),
+]
 
 # Chemin absolu vers le répertoire où les fichiers de médias seront stockés
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
